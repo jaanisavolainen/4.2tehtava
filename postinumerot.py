@@ -1,45 +1,19 @@
-from postitoimipaikka import hae_postinumerot
+import json
+import os, sys
+# JSON-data on tässä kovakoodattu moniriviseksi merkkijonoksi.
+# Käytä `open`-funktiota lukeaksesi tiedot levyltä tai
+# `urllib`-kirjastoa lukeaksesi tiedot suoraan netistä.
+# print(os.path.join(sys.path[0],"postcode_map.json"))
 
+def luo_data_postinumerot():
+    pathi = os.path.join(sys.path[0],"postcode_map_light.json")
+    with open(pathi) as f:
+     data = json.load(f)
+    return data
 
-def ryhmittele_toimipaikkoihin(postinumerot):
-    toimipaikat = {}
-    for numero, nimi in postinumerot.items():
-        if nimi in toimipaikat:
-            toimipaikat[nimi].append(numero)
-        else:
-            toimipaikat[nimi] = [numero]
+def etsi_postinumero(x,data):
+  if x.upper() in data:
+      return(data[x.upper()])
+  else:
+     return
 
-    return toimipaikat
-
-
-def etsi_toimipaikan_numerot(toimipaikan_nimi, toimipaikat):
-    nimi_isolla = toimipaikan_nimi.strip().upper()
-    if nimi_isolla in toimipaikat:
-        return toimipaikat[nimi_isolla]
-    else:
-        return []
-
-
-def muotoile_tuloste(numerot):
-    if numerot:
-        return 'Postinumerot: ' + ', '.join(numerot)
-    else:
-        return 'Postitoimipaikkaa ei löytynyt :('
-
-
-def main():
-    postinumerot = hae_postinumerot()
-
-    toimipaikat = ryhmittele_toimipaikkoihin(postinumerot)
-
-    etsittava = input('Kirjoita postitoimipaikka: ')
-
-    numerot = etsi_toimipaikan_numerot(etsittava, toimipaikat)
-
-    tuloste = muotoile_tuloste(numerot)
-
-    print(tuloste)
-
-
-if __name__ == '__main__':
-    main()
