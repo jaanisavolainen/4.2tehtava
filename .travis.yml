@@ -9,7 +9,7 @@ python:
 install:
   - pip install coverage
   - pip install -r requirements.txt
-  - pip install .
+ # - pip install .
 # command to run tests
 script: pytest
   - coverage run test_postinumerot.py
