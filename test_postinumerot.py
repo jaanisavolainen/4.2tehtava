@@ -5,7 +5,7 @@ def test_ryhmittele_yksi_postinumero():
     aineisto = {"10120": "TÄHTELÄ"}
 
     toimipaikat = ryhmittele_toimipaikkoihin(aineisto)
-    assert True == False
+   # assert True == False
     assert toimipaikat == {"TÄHTELÄ": ["10120"]}
 
 
