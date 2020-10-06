@@ -12,6 +12,8 @@ install:
  # - pip install .
 # command to run tests
 script: 
-  - pytest
+  # - pytest
   - coverage run test_postinumerot.py
+#  - coverage report -m
+after_success:
   - coverage report -m
